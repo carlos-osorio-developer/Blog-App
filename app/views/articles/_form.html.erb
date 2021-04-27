@@ -1,32 +1,30 @@
 <%= form_with model: article do |form| %>
-    <div>
-      <%= form.label :title %><br>
-      <%= form.text_field :title %>
-      <% article.errors.full_messages_for(:title).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %><br>
+    <%= form.text_field :title, class: "form-control" %>
+    <% article.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
   
-    <div>
-      <%= form.label :body %><br>
-      <%= form.text_area :body %><br>
-      <% article.errors.full_messages_for(:body).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
+  <div class="mb-3">
+    <%= form.label :body, class: "form-label" %><br>
+    <%= form.text_area :body, class: "form-control" %><br>
+    <% article.errors.full_messages_for(:body).each do |message| %>
+      <div class="alert alert-danger"><%= message %></div>
+    <% end %>
+  </div>
   
-    <div>
-      <%= form.label :tag_list %><br>
-      <%= form.text_field :tag_list %>
-    </div>
-
-    <div>
-      <%= form.label :status %><br>
+  <div class="mb-3">
+    <%= form.label :tag_list, class: "form-label" %><br>
+    <%= form.text_field :tag_list, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+      <%= form.submit :Submit, class: "btn btn-primary" %>
+  </div>      
+  <div class="mb-3">
+      <%= form.label :status, class: "form-label" %><br>
       <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
-    </div>
-
-    <div>
-      <%= form.submit %>
-    </div>
-  <% end %>
+    </div>  
+<% end %>
   
