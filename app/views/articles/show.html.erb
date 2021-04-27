@@ -1,23 +1,39 @@
-<h1><%= @article.title %></h1>
+<div class="container border overflow-hidden">
+  <div class="row gx-5 p-2">
+    <div class="col">
+      <h1><%= @article.title %></h1>
+      
+      <p>
+        <b>Tags: </b>
+        <% @article.tags.each do |tag| %>  
+          <%= link_to tag.name, tag_path(tag), class: "badge bg-secondary text-decoration-none" %>
+        <% end %>
+      </p>
 
-<h2>Tags</h2>
-<p>
-  <% @article.tags.each do |tag| %>  
-    <%= link_to tag.name, tag_path(tag) %>
-  <% end %>
-</p>
-
-<p><%= @article.body %></p>
-
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
-</ul>
-
-<h2>Comments</h2>
-<%= render @article.comments %>
-
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+      <div class="col-10 border bg-light p-2">
+        <p><%= @article.body %></p>
+      </div>
+      <br>
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-primary" %>
+      <%= link_to "Destroy", article_path(@article),
+                            class: "btn btn-outline-primary",
+                            method: :delete,
+                            data: { confirm: "Are you sure?" } %></button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container card px-0">
+  <h2 class="card-header">
+    Comments
+  </h2>
+  <%= render @article.comments %>
+</div>
+<br>
+<div class="container border p-4">
+  <h2>Add a comment:</h2>
+  <%= render 'comments/form' %>
+</div>
+<br>
