@@ -1,7 +1,30 @@
-<h1>Articles Tagged with <%= @tag.name %></h1>
+<div class="container-fluid">
+  <h1>Articles Tagged with <%= @tag.name %></h1>
 
-<ul>
-  <% @tag.articles.each do |article| %>
-    <li><%= link_to article.title, article_path(article) %></li>
+  <% count = 0 %>
+  <% until count == @tag.articles.length do %>
+    <% if count%3 == 0 %>
+    <div class="row">
+    <% end %>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+          <% article = @tag.articles[count] %>
+            <h5 class="card-title"><%= article.title %></h5>
+            <p class="card-text"><%= article.body[(0..20)]+"..." %></p>
+            <p>
+            <% article.tags.each do |tag| %>  
+              <%= link_to tag.name, tag_path(tag), class: "badge bg-secondary text-decoration-none" %>
+            <% end %>
+            </p>
+            <%= link_to "Go to Article", article, class: "btn btn-primary", role: "button" %>
+          </div>
+        </div>
+      </div>
+    <% if count%3 == 2 %>
+    </div>
+    <br>
+    <% end %>
+    <% count += 1 %>
   <% end %>
-</ul>
+</div>
